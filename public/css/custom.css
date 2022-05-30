@@ -1,0 +1,14 @@
+.reset {
+    cursor: pointer;
+    user-select: none;
+}
+
+.buttonReset {
+    border: none;
+    background: none;
+    color: darkgray;
+}
+
+.buttonReset:hover {
+    color: white;
+}

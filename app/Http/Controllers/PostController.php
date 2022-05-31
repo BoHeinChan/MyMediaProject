@@ -43,8 +43,7 @@ class PostController extends Controller
                 'description' => $request->description,
                 'category_id' => $request->category_id,
             ]);
-        }
-        ;
+        };
         $categories = Category::query()->get();
         return redirect()->route('admin.add_post_page', compact('categories'))->with('successd', 'Successfully added new post...');
     }

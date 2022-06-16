@@ -59,6 +59,10 @@ Route::middleware([
             Route::get('post', 'index')->name('post');
             Route::get('add_post', 'add_post_page')->name('add_post_page');
             Route::post('add_post', 'add_post')->name('add_post');
+            Route::get('edit_post_page/{id}', 'edit_post_page')->name('edit_post_page');
+            Route::post('edit_post_page/{id}', 'edit_post')->name('edit_post');
+            Route::get('search_post', 'search_post')->name('search_post');
+            Route::get('delete_post/{id}', 'delete_post')->name('delete_post');
         });
         // TrendPost
         Route::controller(TrendPostController::class)->group(function () {

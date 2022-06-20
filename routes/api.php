@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ActionLogConetroller;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\PostController;
@@ -40,5 +41,10 @@ Route::controller(CategoryController::class)->group(function () {
 });
 Route::controller(PostController::class)->group(function () {
     Route::get('post_list', 'post_list');
+    Route::post('post_details', 'post_details');
 });
 // });
+
+Route::controller(ActionLogConetroller::class)->group(function () {
+    Route::post('action_log', 'action_log');
+});

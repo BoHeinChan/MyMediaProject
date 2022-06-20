@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -15,5 +16,13 @@ class PostController extends Controller
             'data' => $posts,
         ];
         return response()->json($data_repsonse);
+    }
+
+    public function post_details(Request $request)
+    {
+        $post = Post::query()->where('id', $request->key)->first();
+        return response()->json([
+            'post' => $post,
+        ]);
     }
 }

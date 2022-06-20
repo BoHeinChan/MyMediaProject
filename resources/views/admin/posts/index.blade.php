@@ -46,35 +46,27 @@
                     @foreach ($posts as $post)
                         <div class="card mx-2 my-1 mb-0 bg-cyan">
                             <div class="card-body d-flex justify-content-between align-items-center">
-                                @if (isset($post->image) == 1)
-                                    <div class="w-50">
-                                        <h5 class="fw-bold">{{ $post->title }}</h5>
-                                        <p class="card-text text-wrap">{{ $post->description }}</p>
-                                        <a href="{{ route('admin.edit_post_page', $post->id) }}">
-                                            <button class="btn btn-sm bg-dark text-white"><i
-                                                    class="fas fa-edit"></i></button>
-                                        </a>
-                                        <a href="{{ route('admin.delete_post', $post->id) }}">
-                                            <button class="btn btn-sm bg-danger text-white"><i
-                                                    class="fas fa-trash-alt"></i></button>
-                                        </a>
-                                    </div>
-                                    <div class="text-right w-25"><img src="{{ asset('storage/images/' . $post->image) }}"
-                                            class="card-img-top w-100" alt="Image"></div>
-                                @else
-                                    <div class="w-50">
-                                        <h5 class="fw-bold">{{ $post->title }}</h5>
-                                        <p class="card-text text-wrap">{{ $post->description }}</p>
-                                        <a href="{{ route('admin.edit_post_page', $post->id) }}">
-                                            <button class="btn btn-sm bg-dark text-white"><i
-                                                    class="fas fa-edit"></i></button>
-                                        </a>
-                                        <a href="{{ route('admin.delete_post', $post->id) }}">
-                                            <button class="btn btn-sm bg-danger text-white"><i
-                                                    class="fas fa-trash-alt"></i></button>
-                                        </a>
-                                    </div>
-                                @endif
+                                <div class="w-50">
+                                    <h5 class="fw-bold">{{ $post->title }}</h5>
+                                    <p class="card-text text-wrap">{{ $post->description }}</p>
+                                    <a href="{{ route('admin.edit_post_page', $post->id) }}">
+                                        <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
+                                    </a>
+                                    <a href="{{ route('admin.delete_post', $post->id) }}">
+                                        <button class="btn btn-sm bg-danger text-white"><i
+                                                class="fas fa-trash-alt"></i></button>
+                                    </a>
+                                </div>
+                                <div class="text-right w-25">
+                                    @if ($post->image == null)
+                                        <img src="{{ asset('default/default-image.jpg') }}"
+                                            class="card-img-top w-100 rounded" alt="Image">
+                                    @else
+                                        <img src="{{ asset('storage/images/' . $post->image) }}"
+                                            class="card-img-top w-100" alt="Image">
+                                    @endif
+                                </div>
+
                             </div>
                         </div>
                     @endforeach

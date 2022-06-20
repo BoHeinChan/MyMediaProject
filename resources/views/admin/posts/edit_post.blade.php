@@ -12,8 +12,14 @@
                 <div class="card-header p-2">
                     <legend class="text-center">Edit Post</legend>
                 </div>
-                <div class="text-center mt-3"><img src="{{ asset('storage/images/' . $post->image) }}"
-                        class="card-img-top w-25" alt="Image"></div>
+                <div class="text-center mt-3">
+                    @if ($post->image == null)
+                        <img src="{{ asset('default/default-image.jpg') }}" class="card-img-top w-50 rounded"
+                            alt="Image">
+                    @else
+                        <img src="{{ asset('storage/images/' . $post->image) }}" class="card-img-top w-50" alt="Image">
+                    @endif
+                </div>
                 <div class="card-body">
                     @if (Session::has('successu'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -25,14 +31,15 @@
                     @endif
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            <form class="form-horizontal" action="{{ route('admin.edit_post', $post->id) }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{ route('admin.edit_post', $post->id) }}"
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                            id="title" name="title" placeholder="Add title" value="{{ $post->title }}">
+                                            id="title" name="title" placeholder="Add title"
+                                            value="{{ $post->title }}">
                                         @error('title')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -41,8 +48,8 @@
                                 <div class="form-group row">
                                     <label for="description" class="col-sm-2 col-form-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" cols="10"
-                                            rows="5" placeholder="Add description">{{ $post->description }}</textarea>
+                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description"
+                                            cols="10" rows="5" placeholder="Add description">{{ $post->description }}</textarea>
                                         @error('description')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -52,7 +59,8 @@
                                     <label for="image" class="col-sm-2 col-form-label">Image</label>
                                     <div class="col-sm-10">
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="image" name="image" placeholder="Add image" value="{{ $post->image }}">
+                                            id="image" name="image" placeholder="Add image"
+                                            value="{{ $post->image }}">
                                         @error('image')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -61,8 +69,7 @@
                                 <div class="form-group row">
                                     <label for="image" class="col-sm-2 col-form-label">Category</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" name="category_id"
-                                            aria-label="Default select example">
+                                        <select class="form-control" name="category_id" aria-label="Default select example">
                                             @foreach ($categories as $category)
                                                 @if ($post->category_id == $category->id)
                                                     <option value="{{ $category->id }}" selected>

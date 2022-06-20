@@ -10,7 +10,8 @@
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                    placeholder="Search">
 
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
@@ -25,44 +26,32 @@
                         <table class="table table-hover text-nowrap text-center">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Pizza Name</th>
-                                    <th>Carrier Name</th>
-                                    <th>Payment With</th>
-                                    <th>Order Time</th>
-                                    <th></th>
+                                    <th>ID</th>
+                                    <th>Post ID</th>
+                                    <th>Post Title</th>
+                                    <th>Image</th>
+                                    <th>View Count</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Sithu</td>
-                                    <td>Seafood Pizza</td>
-                                    <td>Mg Kyaw Kyaw</td>
-                                    <td>Card</td>
-                                    <td>2/2/2021</td>
-                                    <td>
-                                        <button class="btn btn-sm bg-dark text-white"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm bg-danger text-white"><i
-                                                class="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Tun Tun</td>
-                                    <td>Seafood Pizza</td>
-                                    <td>Mg Kyaw Kyaw</td>
-                                    <td>Card</td>
-                                    <td>2/2/2021</td>
-                                    <td>
-                                        <button class="btn btn-sm bg-dark text-white"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm bg-danger text-white"><i
-                                                class="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>
+                                @foreach ($posts as $post)
+                                    <tr>
+                                        <td>{{ $post->id }}</td>
+                                        <td>{{ $post->post_id }}</td>
+                                        <td>{{ $post->title }}</td>
+                                        <td>
+                                            @if ($post->image == null)
+                                                <img src="{{ asset('default/default-image.jpg') }}"
+                                                    class="card-img-top w-50 rounded" alt="Image">
+                                            @else
+                                                <img src="{{ asset('storage/images/' . $post->image) }}"
+                                                    class="card-img-top w-50" alt="Image">
+                                            @endif
+                                        </td>
+                                        <td><i class="fa fa-eye" aria-hidden="true"> {{ $post->count }}</i></td>
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -38,12 +38,14 @@ class ApiController extends Controller
         ]);
         $user = User::query()->where('email', $request->email)->first();
         if (empty($user) || !Hash::check($request->password, $user->password)) {
-            return response([
-                'message' => 'Credential do not match!',
+            return response()->json([
+                'message' => 'Login Success',
+                'data' => null,
+                'token' => null,
             ]);
         } else {
             $token = $user->createToken('token')->plainTextToken;
-            return response([
+            return response()->json([
                 'message' => 'Login Success',
                 'data' => $user,
                 'token' => $token,
